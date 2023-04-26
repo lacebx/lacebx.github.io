@@ -1,0 +1,48 @@
+body {
+  background-image: url("this.jpeg");
+  background-size: cover;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+h1 {
+  text-align: center;
+}
+header {
+  background-color: black;
+  color: white;
+  padding: 10px;
+}
+header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+header li {
+  float: left;
+}
+header li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+header li a:hover {
+  background-color: #111;
+}
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+footer a {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
