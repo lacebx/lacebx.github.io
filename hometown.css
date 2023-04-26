@@ -1,0 +1,123 @@
+body {
+  background-image: url("this.jpeg");
+  background-size: cover;
+  color: white;
+  padding-bottom: 300px;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+table {
+  margin: auto;
+  width: 50%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Style the Swiper.js carousel */
+.swiper-container {
+  height: 300px; /* Set the height of the carousel */
+  width: 100%; /* Make the carousel full-width */
+  background-color: transparent; /* Set the background color to transparent */
+  overflow: hidden; /* Hide overflow */
+}
+
+.swiper-slide {
+  background-color:transparent;
+  border: 10px transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+}
+
+/* Style the navigation buttons */
+.swiper-button-next, .swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+/* Hide the navigation buttons when the carousel is inactive */
+.swiper-button-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+header {
+  background-color: black;
+  color: white;
+  padding: 10px;
+}
+
+header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header li {
+  float: left;
+}
+
+header li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+header li a:hover {
+  background-color: #111;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+  margin-right: 10px;
+}
