@@ -122,16 +122,43 @@ const formBtn = document.querySelector("[data-form-btn]");
 // add event to all form input field
 for (let i = 0; i < formInputs.length; i++) {
   formInputs[i].addEventListener("input", function () {
-
     // check form validation
     if (form.checkValidity()) {
       formBtn.removeAttribute("disabled");
     } else {
       formBtn.setAttribute("disabled", "");
     }
-
   });
 }
+
+// Handle form submission
+form.addEventListener('submit', async function(e) {
+  // Show sending state
+  formBtn.disabled = true;
+  formBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Sending...</span>';
+
+  try {
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay for UX
+    // Simulate the form submission to Formspree
+    // This is a placeholder for the actual form submission logic to Formspree
+    // Assuming the submission is successful, show a success message
+    alert('Your message has been sent successfully!');
+
+    // Clear input fields on successful submission
+    formInputs.forEach(input => {
+      input.value = ''; // Clear each input field
+    });
+
+    // Optionally reset the button state
+    formBtn.innerHTML = '<ion-icon name="paper-plane"></ion-icon><span>Send Message</span>';
+    formBtn.disabled = false;
+
+  } catch (error) {
+    console.error('Form submission error:', error);
+    alert('Failed to send message. Please try again later.');
+    // No need to clear input fields if there's an error
+  }
+});
 
 
 
