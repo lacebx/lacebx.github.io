@@ -202,3 +202,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
   observer.observe(skillsSection);
 });
+
+// Add this code to handle theme toggling
+const themeToggleBtn = document.getElementById('theme-toggle');
+const body = document.body;
+
+themeToggleBtn.addEventListener('click', () => {
+  body.classList.toggle('light-theme');
+});
+
+// Add this code to handle scroll-triggered animations
+const timelineItems = document.querySelectorAll('[data-timeline-item]');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible'); // Add visible class for animation
+      observer.unobserve(entry.target); // Stop observing after animation
+    }
+  });
+});
+
+timelineItems.forEach(item => {
+  observer.observe(item);
+});

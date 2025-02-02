@@ -336,6 +336,15 @@ main {
   border-radius: 20px;
 }
 
+.avatar-box img {
+  width: 120px;
+  transition: transform 0.3s ease;
+}
+
+.avatar-box img:hover {
+  transform: translateY(-10px);
+}
+
 .info-content .name {
   color: var(--white-2);
   font-size: var(--fs-3);
@@ -1232,6 +1241,11 @@ textarea.form-input::-webkit-resizer { display: none; }
 
 .form-btn:disabled:hover::before { background: var(--bg-gradient-jet); }
 
+.fun-line {
+  opacity: 0.7;
+  color: var(--orange-yellow-crayola);
+  margin-left: 200px;
+}
 
 
 
@@ -1883,3 +1897,15 @@ textarea.form-input::-webkit-resizer { display: none; }
   .timeline-text { max-width: 700px; }
 
 }
+
+/* Add this CSS for light theme */
+body.light-theme {
+  background-color: #ffffff; /* Light background */
+  color: #000000; /* Dark text */
+}
+
+body.light-theme .form-input {
+  border-color: var(--jet); /* Adjust input border for light theme */
+}
+
+/* Adjust other styles as necessary for light theme */
