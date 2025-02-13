@@ -283,9 +283,12 @@ document.addEventListener('DOMContentLoaded', function() {
 const chatWidget = document.getElementById("chat-widget");
 const toggleChatButton = document.getElementById("toggle-chat");
 
+// Set chat widget to be hidden by default
+chatWidget.style.display = "none";
+
 toggleChatButton.addEventListener("click", function() {
-const isVisible = chatWidget.style.display === "block";
-chatWidget.style.display = isVisible ? "none" : "block";
+  const isVisible = chatWidget.style.display === "block";
+  chatWidget.style.display = isVisible ? "none" : "block";
 });
 
 // Function to append messages to the chat window
