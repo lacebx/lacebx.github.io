@@ -203,26 +203,161 @@ document.addEventListener('DOMContentLoaded', function() {
   observer.observe(skillsSection);
 });
 
-// Add this code to handle theme toggling
-const themeToggleBtn = document.getElementById('theme-toggle');
-const body = document.body;
 
-themeToggleBtn.addEventListener('click', () => {
-  body.classList.toggle('light-theme');
+ // Replace with your deployed Railway URL
+ const CHATBOT_API_URL = "https://me0-minimvp-production.up.railway.app/chat";
+
+ // Flag to track if the bot is processing a request
+ let isProcessing = false;
+
+ // Function to append messages to the chat window
+ function appendMessage(sender, text) {
+   const chatMessages = document.getElementById("chat-messages");
+   const message = document.createElement("p");
+   message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+   chatMessages.appendChild(message);
+   chatMessages.scrollTop = chatMessages.scrollHeight;
+ }
+
+ // Function to show/hide typing indicator
+ function showTyping(show) {
+   const typingIndicator = document.getElementById("typing-indicator");
+   typingIndicator.style.display = show ? "block" : "none";
+ }
+
+ // Disable or enable the input and button
+ function setInputDisabled(state) {
+   document.getElementById("chat-input").disabled = state;
+   document.getElementById("chat-send").disabled = state;
+ }
+
+ document.getElementById("chat-send").addEventListener("click", function() {
+   if (isProcessing) return; // Prevent sending new requests while processing
+   const input = document.getElementById("chat-input");
+   const query = input.value.trim();
+   if (!query) return;
+
+   // Append user's message
+   appendMessage("You", query);
+   // Clear input and disable it
+   input.value = "";
+   setInputDisabled(true);
+   // Show typing indicator
+   showTyping(true);
+   isProcessing = true;
+   
+   // Send the query to the Flask backend
+   fetch(CHATBOT_API_URL, {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json"
+     },
+     body: JSON.stringify({ query: query })
+   })
+   .then(response => response.json())
+   .then(data => {
+     // Remove typing indicator and re-enable input
+     showTyping(false);
+     setInputDisabled(false);
+     isProcessing = false;
+     appendMessage("Lace", data.response || "Sorry, I didn't get that.");
+   })
+   .catch(error => {
+     console.error("Error:", error);
+     showTyping(false);
+     setInputDisabled(false);
+     isProcessing = false;
+     appendMessage("Error", "Something went wrong. Please try again later.");
+   });
+ });
+
+ // Send query on Enter key press
+ document.getElementById("chat-input").addEventListener("keydown", function(e) {
+   if (e.key === "Enter" && !isProcessing) {
+     document.getElementById("chat-send").click();
+   }
+ });
+
+
+// Toggle chat widget visibility
+const chatWidget = document.getElementById("chat-widget");
+const toggleChatButton = document.getElementById("toggle-chat");
+
+toggleChatButton.addEventListener("click", function() {
+const isVisible = chatWidget.style.display === "block";
+chatWidget.style.display = isVisible ? "none" : "block";
 });
 
-// Add this code to handle scroll-triggered animations
-const timelineItems = document.querySelectorAll('[data-timeline-item]');
+// Function to append messages to the chat window
+function appendMessage(sender, text) {
+  const chatMessages = document.getElementById("chat-messages");
+  const message = document.createElement("p");
+  message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+  chatMessages.appendChild(message);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible'); // Add visible class for animation
-      observer.unobserve(entry.target); // Stop observing after animation
-    }
+// Function to show/hide typing indicator
+function showTyping(show) {
+  const typingIndicator = document.getElementById("typing-indicator");
+  typingIndicator.style.display = show ? "block" : "none";
+}
+
+// Disable or enable the input and button
+function setInputDisabled(state) {
+  document.getElementById("chat-input").disabled = state;
+  document.getElementById("chat-send").disabled = state;
+}
+
+document.getElementById("chat-send").addEventListener("click", function() {
+  if (isProcessing) return; // Prevent sending new requests while processing
+  const input = document.getElementById("chat-input");
+  const query = input.value.trim();
+  if (!query) return;
+
+  // Append user's message
+  appendMessage("You", query);
+  // Clear input and disable it
+  input.value = "";
+  setInputDisabled(true);
+  // Show typing indicator
+  showTyping(true);
+  isProcessing = true;
+  
+  // Send the query to the Flask backend
+  fetch(CHATBOT_API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ query: query })
+  })
+  .then(response => {
+    console.log("Raw response:", response);
+    return response.json();
+  })
+  .then(data => {
+    console.log("Parsed data:", data);
+    showTyping(false);
+    setInputDisabled(false);
+    isProcessing = false;
+    appendMessage("Lace", data.response || "Sorry, I didn't get that.");
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    showTyping(false);
+    setInputDisabled(false);
+    isProcessing = false;
+    appendMessage("Error", "Something went wrong. Please try again later.");
   });
+  
 });
 
-timelineItems.forEach(item => {
-  observer.observe(item);
+// Send query on Enter key press
+document.getElementById("chat-input").addEventListener("keydown", function(e) {
+  if (e.key === "Enter" && !isProcessing) {
+    document.getElementById("chat-send").click();
+  }
 });
+
+  
