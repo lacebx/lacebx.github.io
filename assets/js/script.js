@@ -214,7 +214,8 @@ document.addEventListener('DOMContentLoaded', function() {
  function appendMessage(sender, text) {
    const chatMessages = document.getElementById("chat-messages");
    const message = document.createElement("p");
-   message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+   message.innerHTML = `<strong style="color: #D3D3D3;">${sender}:</strong> ${text}`;
+   message.classList.add(sender === "You" ? "user-message" : "bot-message");
    chatMessages.appendChild(message);
    chatMessages.scrollTop = chatMessages.scrollHeight;
  }
@@ -295,7 +296,8 @@ toggleChatButton.addEventListener("click", function() {
 function appendMessage(sender, text) {
   const chatMessages = document.getElementById("chat-messages");
   const message = document.createElement("p");
-  message.innerHTML = `<strong>${sender}:</strong> ${text}`;
+  message.innerHTML = `<strong style="color: #D3D3D3;">${sender}:</strong> ${text}`;
+  message.classList.add(sender === "You" ? "user-message" : "bot-message");
   chatMessages.appendChild(message);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }

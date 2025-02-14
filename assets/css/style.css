@@ -1927,3 +1927,13 @@ textarea.form-input::-webkit-resizer { display: none; }
 }
 
 /* Adjust other styles as necessary for light theme */
+
+.user-message {
+    text-align: left; /* Align user messages to the left */
+    margin-bottom: 20px; /* Add space below user messages */
+}
+
+.bot-message {
+    text-align: right; /* Align bot messages to the right */
+    margin-bottom: 20px; /* Add space below bot messages */
+}
