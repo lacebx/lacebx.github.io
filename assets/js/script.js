@@ -365,4 +365,7 @@ document.getElementById("chat-input").addEventListener("keydown", function(e) {
   }
 });
 
+// Update the send button's HTML to use an icon
+document.getElementById("chat-send").innerHTML = '<ion-icon name="paper-plane"></ion-icon>';
+
   

@@ -452,7 +452,6 @@ main {
   font-size: 18px;
 }
 
-
 .social-item .social-link:hover { color: var(--light-gray); }
 
 
@@ -1936,4 +1935,12 @@ textarea.form-input::-webkit-resizer { display: none; }
 .bot-message {
     text-align: right; /* Align bot messages to the right */
     margin-bottom: 20px; /* Add space below bot messages */
+}
+
+/* Add this CSS rule to position the send button */
+#chat-send {
+    margin-left: 8px; /* Position the button 2px to the right of the input field */
+}
+.buttonfront{
+  display: flex;
 }
