@@ -1,4 +1,6 @@
+// script.js
 'use strict';
+
 
 
 
@@ -166,23 +168,107 @@ form.addEventListener('submit', async function(e) {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
-// add event to all nav link
+// Initialize: Hide the AI Playground tab until Projects is clicked
+let projectsClicked = false;
+const aiPlaygroundNavLink = document.querySelector("[data-nav-link='ai-playground']");
+if (aiPlaygroundNavLink) {
+  aiPlaygroundNavLink.classList.add("hidden");
+}
+
+// add event to all nav links
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
-
-    for (let i = 0; i < pages.length; i++) {
-      if (this.innerHTML.toLowerCase() === pages[i].dataset.page) {
-        pages[i].classList.add("active");
-        navigationLinks[i].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[i].classList.remove("active");
-        navigationLinks[i].classList.remove("active");
+    console.log(`Clicked on: ${this.innerHTML}`);
+    
+    // If "Projects" is clicked and it hasn't been clicked before, reveal AI Playground
+    if (this.innerHTML.toLowerCase() === "projects" && !projectsClicked) {
+      projectsClicked = true;
+      if (aiPlaygroundNavLink) {
+        aiPlaygroundNavLink.classList.remove("hidden");
       }
     }
-
+    
+    // Activate the corresponding page
+    for (let j = 0; j < pages.length; j++) {
+      if (this.innerHTML.toLowerCase() === pages[j].dataset.page) {
+        pages[j].classList.add("active");
+        navigationLinks[j].classList.add("active");
+        console.log(`Activating page: ${pages[j].dataset.page}`);
+        window.scrollTo(0, 0);
+      } else {
+        pages[j].classList.remove("active");
+        navigationLinks[j].classList.remove("active");
+      }
+      console.log(`Page classes: ${pages[j].classList}`);
+    }
   });
 }
+
+
+// --- New AI Playground Filtering Mechanism ---
+
+// Global filter state (default is "all" for both)
+let currentModelFilter = "all";
+let currentCategoryFilter = "all";
+
+// Get the filter icon button and panel
+const aiFilterBtn = document.querySelector(".ai-filter-btn");
+const aiFilterPanel = document.querySelector(".ai-filter-panel");
+
+// Toggle the filter panel when the filter icon is clicked
+if (aiFilterBtn && aiFilterPanel) {
+  aiFilterBtn.addEventListener("click", function() {
+    aiFilterPanel.classList.toggle("hidden");
+  });
+}
+
+// Attach event listeners to each filter option button within the panel
+const filterOptions = document.querySelectorAll(".ai-filter-panel .filter-option");
+filterOptions.forEach(option => {
+  option.addEventListener("click", function() {
+    const type = this.getAttribute("data-filter-type");
+    const value = this.getAttribute("data-filter-value");
+    
+    // Remove the "active" class from all options of this type
+    filterOptions.forEach(opt => {
+      if (opt.getAttribute("data-filter-type") === type) {
+        opt.classList.remove("active");
+      }
+    });
+    // Mark the clicked option as active
+    this.classList.add("active");
+    
+    // Update the global filter variable
+    if (type === "model") {
+      currentModelFilter = value;
+    } else if (type === "category") {
+      currentCategoryFilter = value;
+    }
+    
+    // Filter the projects based on the selected options
+    filterAIPlaygroundProjects();
+    
+    // Optionally, hide the filter panel after a selection
+    // aiFilterPanel.classList.add("hidden");
+  });
+});
+
+// Function to filter projects in the AI Playground
+function filterAIPlaygroundProjects(){
+  const projectItems = document.querySelectorAll("article.ai-playground .project-item");
+  projectItems.forEach(item => {
+    const itemModel = item.getAttribute("data-model") || "all";
+    const itemCategory = item.getAttribute("data-category") || "all";
+    // Show the item if it matches both filters or if a filter is "all"
+    if ((currentModelFilter === "all" || itemModel === currentModelFilter) &&
+        (currentCategoryFilter === "all" || itemCategory === currentCategoryFilter)) {
+      item.style.display = "block";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
 
 // JavaScript to trigger the animation
 document.addEventListener('DOMContentLoaded', function() {
@@ -367,5 +453,27 @@ document.getElementById("chat-input").addEventListener("keydown", function(e) {
 
 // Update the send button's HTML to use an icon
 document.getElementById("chat-send").innerHTML = '<ion-icon name="paper-plane"></ion-icon>';
+
+// Add event listener for AI Playground tab
+const aiPlaygroundBtn = document.querySelector("[data-nav-link='AI Playground']");
+aiPlaygroundBtn.addEventListener("click", function () {
+    // Call the function to activate the AI Playground page
+    activatePage('ai-playground');
+});
+
+// Function to activate the page
+function activatePage(page) {
+    const pages = document.querySelectorAll("article");
+    pages.forEach(p => {
+        p.classList.remove("active");
+    });
+    const activePage = document.querySelector(`article[data-page="${page}"]`);
+    if (activePage) {
+        activePage.classList.add("active");
+        console.log(`Activating page: ${page}`);
+    } else {
+        console.error(`Page not found: ${page}`);
+    }
+}
 
   
