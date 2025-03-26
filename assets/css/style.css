@@ -129,7 +129,8 @@ a { text-decoration: none; }
 
 li { list-style: none; }
 
-img, ion-icon, a, button, time, span { display: block; }
+img, a, button, time, span { display: block; }
+ion-icon { display: inline-block; }
 
 button {
   font: inherit;
@@ -2161,6 +2162,14 @@ article.active {
   .ai-playground .project-list {
     grid-template-columns: 1fr; /* 1 item per row on small screens */
   }
+}
+
+/* Ensure that inline icons have explicit sizes and inline-block display */
+ion-icon,
+svg {
+  width: 24px;     /* Adjust size as needed */
+  height: 24px;    /* Adjust size as needed */
+  display: inline-block;
 }
 
 
