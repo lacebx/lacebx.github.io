@@ -100,9 +100,7 @@
             <div class="contact-info">
               <p class="contact-title">Phone</p>
 
-              <a href="tel:(929)473-1844" class="contact-link">(929)473-1844
-
-              </a>
+              <a href="tel:(929)473-1844" class="contact-link" target="_blank">(929)473-1844</a>
             </div>
 
           </li>
@@ -123,7 +121,7 @@
             <div class="contact-info">
               <p class="contact-title">Location</p>
 
-              <address>Edmond, Oklahoma</address>
+              <address target="_blank">Edmond, Oklahoma</address>
             </div>
 
           </li>
@@ -188,7 +186,10 @@
             <button class="navbar-link" data-nav-link>Projects</button> <!-- Changed from "projects" to "Projects" -->
           </li>
 
-       
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link="ai-playground">AI Playground</button>
+          </li>
+          
 
           <li class="navbar-item">
             <button class="navbar-link" data-nav-link>Contact</button>
@@ -214,20 +215,25 @@
 
         <section class="about-text">
           <p>
-            Hi! I'm Arsène Manzi, a computer science student with a strong passion for cybersecurity, AI, and digital collections. My work and interests span across several emerging technologies. I've been actively exploring the integration of AI in chatbot development, leveraging platforms like ChatGPT to create intelligent, conversational systems. This has deepened my appreciation for AI's potential and its growing role in shaping future technologies.
+            Hi! I'm Arsène Manzi, a computer science student passionate about AI, automation, and the intersection of technology with everyday life. My journey in tech has been hands-on, with a strong focus on building and experimenting rather than just theory.
           </p>
 
           <p>
-            In addition to AI, I'm equally driven by my enthusiasm for cybersecurity. I regularly attend webinars and events to stay current with the latest security advancements, continually expanding my skills in this critical field. I'm committed to mastering the tools and techniques necessary to safeguard digital systems in today's evolving landscape.
+            I have been deeply engaged in AI-driven chatbot development, leveraging platforms like ChatGPT to create intelligent, interactive systems. This experience has reinforced my belief in AI's potential to enhance human-computer interactions and streamline complex tasks. I also enjoy scripting and automation, using Python and other tools to simplify workflows, optimize processes, and explore creative problem-solving.
           </p>
 
 
           <p>
-            Beyond that, I'm an avid digital collector, curating a unique collection of rare digital artifacts. I enjoy preserving and sharing these treasures with others, showcasing the cultural significance of the digital world. As I continue to grow in my expertise, I'm excited to network and collaborate with professionals in AI, cybersecurity, web3, and digital content creation.
+            Beyond AI, I have a growing interest in blockchain and Web3 technologies, fascinated by their potential to redefine digital ownership and decentralization. My experience in this space includes research, analysis, and development efforts to understand how these technologies can empower users.
           </p>
 
           <p>
-            I'm always seeking new challenges and opportunities to learn, innovate, and contribute to these fascinating domains.
+            I consider myself a generalist—someone who explores multiple domains, quickly adapts, and connects ideas across fields. While I don't claim to be an expert in any single area, my strength lies in my ability to learn fast, execute effectively, and bring innovative ideas to life. I enjoy networking with like-minded individuals and collaborating on meaningful projects that push technology forward.
+
+          </p>
+
+          <p>
+            I'm always looking for new challenges that allow me to learn, build, and contribute to the evolving tech landscape.
 
           </p>
 
@@ -587,7 +593,7 @@
         </a>
         <div class="project-details" style="display: none;">
           <p class="project-description">An intelligent assistant using image recognition, real-time camera feed analysis, file management, and command execution integrated with OpenAI's API.</p>
-          <a href="https://github.com/laceb/ai-powered-personal-assistant" class="collaborate-btn" target="_blank">Collaborate</a>
+          <a href="https://github.com/laceb/ai-powered-personal-assistant" class="collaborate-btn">Collaborate</a>
         </div>
       </li>
 
@@ -607,7 +613,7 @@
         </a>
         <div class="project-details" style="display: none;">
           <p class="project-description">A text-based game leveraging GPT-3.5, where players navigate through a forest with dynamic scenarios generated based on player actions.</p>
-          <a href="https://github.com/laceb/python-text-adventure-game" class="collaborate-btn" target="_blank">Collaborate</a>
+          <a href="https://github.com/laceb/python-text-adventure-game" class="collaborate-btn">Collaborate</a>
         </div>
       </li>
 
@@ -627,7 +633,7 @@
         </a>
         <div class="project-details" style="display: none;">
           <p class="project-description">Developed a platform using React and AI to analyze product images, generate descriptions, and set prices based on market data. Integrated with payment systems and delivery APIs.</p>
-          <a href="https://github.com/laceb/ecommerce-web-application" class="collaborate-btn" target="_blank">Collaborate</a>
+          <a href="https://github.com/laceb/ecommerce-web-application" class="collaborate-btn">Collaborate</a>
         </div>
       </li>
 
@@ -647,7 +653,7 @@
         </a>
         <div class="project-details" style="display: none;">
           <p class="project-description">A program designed to warn users about potential financial pitfalls on Web3 and NFT sites by analyzing data from these platforms.</p>
-          <a href="https://github.com/laceb/web3-nft-program" class="collaborate-btn" target="_blank">Collaborate</a>
+          <a href="https://github.com/laceb/web3-nft-program" class="collaborate-btn">Collaborate</a>
         </div>
       </li>
 
@@ -667,16 +673,327 @@
         </a>
         <div class="project-details" style="display: none;">
           <p class="project-description">Automated workflows including web scraping, data extraction, and auto-filling Excel documents to optimize repetitive tasks.</p>
-          <a href="https://github.com/laceb/automation-scripts" class="collaborate-btn" target="_blank">Collaborate</a>
+          <a href="https://github.com/laceb/automation-scripts" class="collaborate-btn">Collaborate</a>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Education">
+        <a href="#" class="project-link">
+          <figure class="project-img">
+            <div class="project-item-icon-box" data-project-toggle>
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img src="./assets/images/flightplan.png" alt="Eagle Flightplan" loading="lazy">
+          </figure>
+          <h3 class="project-title">Eagle Flightplan</h3>
+          <p class="project-category">Education</p>
+        </a>
+        <div class="project-details" style="display: none;">
+          <p class="project-description">An application that helps universities monitor the career readiness and progress of students. Students can log in and earn points by completing tasks assigned by the university, preparing them for employment in their field of study. The app also shares this data with potential employers to help them find suitable candidates.</p>
+          <a href="https://github.com/yourrepo/eagle-flightplan" class="collaborate-btn">Collaborate</a>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Education">
+        <a href="#" class="project-link">
+          <figure class="project-img">
+            <div class="project-item-icon-box" data-project-toggle>
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img src="./assets/images/coursehub.png" alt="Course Hub" loading="lazy">
+          </figure>
+          <h3 class="project-title">Course Hub</h3>
+          <p class="project-category">Education</p>
+        </a>
+        <div class="project-details" style="display: none;">
+          <p class="project-description">An application designed for school administrators to search for courses offered by the university. The app allows users to perform CRUD operations on these courses, facilitating efficient management of course offerings.</p>
+          <a href="https://github.com/yourrepo/course-hub" class="collaborate-btn">Collaborate</a>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Web Development">
+        <a href="#" class="project-link">
+          <figure class="project-img">
+            <div class="project-item-icon-box" data-project-toggle>
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img src="./assets/images/project-langcompare.png" alt="LangCompare" loading="lazy">
+          </figure>
+          <h3 class="project-title">LangCompare</h3>
+          <p class="project-category">Web Development</p>
+        </a>
+        <div class="project-details" style="display: none;">
+          <p class="project-description">A clean, fast React + Tailwind CSS app that compares how different programming languages handle common programming tasks — side by side.</p>
+          <a href="https://github.com/yourrepo/langcompare" class="collaborate-btn">Collaborate</a>
+        </div>
+      </li>
+
+      <li class="project-item active" data-filter-item data-category="Web Development">
+        <a href="#" class="project-link">
+          <figure class="project-img">
+            <div class="project-item-icon-box" data-project-toggle>
+              <ion-icon name="eye-outline"></ion-icon>
+            </div>
+            <img src="./assets/images/team.png" alt="TeamTaskr" loading="lazy">
+          </figure>
+          <h3 class="project-title">TeamTaskr</h3>
+          <p class="project-category">Web Development</p>
+        </a>
+        <div class="project-details" style="display: none;">
+          <p class="project-description">A collaborative Agile project management tool — think a mini Jira/Trello for student teams or startups. Organize tasks into sprints, visualize workflow (Kanban-style), track team members' progress, and document meetings and retros.</p>
+          <a href="https://github.com/yourrepo/TeamTaskr" class="collaborate-btn">Collaborate</a>
         </div>
       </li>
 
     </ul>
 
   </section>
-
 </article>
 
+
+  <!-- AI Playground article-->
+  <article class="ai-playground" data-page="ai playground">
+    <header>
+      <h2 class="h2 article-title">AI Playground</h2>
+      <p>
+        This is where I show the world what man and AI can achieve together. As a software engineering student who fully embraces AI, I'm proud to showcase projects built with 100% AI support. Whether it's a smart calculator that explains its steps, an AI-enhanced game, or an app that turns text into art, here you'll see how I harness today's AI to create innovative, real-world applications.
+      </p>
+    </header>
+  
+    <!-- Filter Options -->
+    <section class="filters">
+      <!-- Filter by AI Model -->
+      <div class="filter-select-box">
+        <button class="filter-select" data-select data-filter-type="model">
+          <div class="select-value" data-selecct-value>Filter by AI Model</div>
+          <div class="select-icon">
+            <ion-icon name="chevron-down"></ion-icon>
+          </div>
+        </button>
+        <ul class="select-list" data-select-list data-filter-type="model">
+          <li class="select-item">
+            <button data-select-item data-model="chatgpt">ChatGPT</button>
+          </li>
+          <li class="select-item">
+            <button data-select-item data-model="grok">Grok</button>
+          </li>
+          <li class="select-item">
+            <button data-select-item data-model="others">Others</button>
+          </li>
+        </ul>
+      </div>
+  
+      <!-- Filter by Category -->
+      <div class="filter-select-box">
+        <button class="filter-select" data-select data-filter-type="category">
+          <div class="select-value" data-selecct-value>Filter by Category</div>
+          <div class="select-icon">
+            <ion-icon name="chevron-down"></ion-icon>
+          </div>
+        </button>
+        <ul class="select-list" data-select-list data-filter-type="category">
+          <li class="select-item">
+            <button data-select-item data-category="productive">Productive</button>
+          </li>
+          <li class="select-item">
+            <button data-select-item data-category="gaming">Gaming</button>
+          </li>
+          <li class="select-item">
+            <button data-select-item data-category="education">Education</button>
+          </li>
+          <li class="select-item">
+            <button data-select-item data-category="creative">Creative</button>
+          </li>
+        </ul>
+      </div>
+    </section>
+  
+    <!-- Projects List -->
+    <section class="projects">
+      <ul class="project-list">
+        <!-- AI Calculator -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="productive">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/calc.png" alt="AI Calculator" loading="lazy">
+            </figure>
+            <h3 class="project-title">AI Calculator</h3>
+            <p class="project-category">Productive</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              A smart calculator that not only performs basic arithmetic but also explains its steps using natural language.
+            </p>
+            <a href="https://github.com/yourrepo/ai-calculator" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- Snake Game with AI Twist -->
+        <li class="project-item active" data-filter-item data-model="grok" data-category="gaming">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/snake.png" alt="Snake Game with AI Twist" loading="lazy">
+            </figure>
+            <h3 class="project-title">AI Snake Game</h3>
+            <p class="project-category">Gaming</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              The classic Snake game, but with an AI-powered adversary and dynamic level adjustments based on real-time analysis.
+            </p>
+            <a href="https://github.com/yourrepo/snake-game-ai" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- Chatbot Storyteller -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="creative">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/story.png" alt="Chatbot Storyteller" loading="lazy">
+            </figure>
+            <h3 class="project-title">Chatbot Storyteller</h3>
+            <p class="project-category">Creative</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              A web app where users input a story prompt and the AI generates a short, creative story with options for different styles.
+            </p>
+            <a href="https://github.com/yourrepo/chatbot-storyteller" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- AI-Powered To-Do List -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="productive">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/task.png" alt="AI-Powered To-Do List" loading="lazy">
+            </figure>
+            <h3 class="project-title">AI-Powered To-Do List</h3>
+            <p class="project-category">Productive</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              A to-do list app that uses AI to prioritize tasks and offer motivational quotes and productivity tips.
+            </p>
+            <a href="https://github.com/yourrepo/ai-todo-list" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- Decentralized SocialHub -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="productive">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/decmeta.png" alt="Decentralized SocialHub" loading="lazy">
+            </figure>
+            <h3 class="project-title">Decentralized SocialHub</h3>
+            <p class="project-category">Productive</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">A decentralized social media platform where users sign up or log in with a Solana wallet and can be rewarded with Solana tokens when they achieve certain traction on engagement.</p>
+            <a href="https://github.com/yourrepo/decentralized-socialhub" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- Hack the Chip -->
+        <li class="project-item active" data-filter-item data-model="others" data-category="gaming">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/hksnk.png" alt="Hack the Chip" loading="lazy">
+            </figure>
+            <h3 class="project-title">Hack the Chip</h3>
+            <p class="project-category">Gaming</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              A game that combines elements of Pac-Man and Snake, where players navigate a maze to collect power-ups while avoiding enemies.
+            </p>
+            <a href="https://github.com/yourrepo/hack-the-chip" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- Smart Weather Advisor -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="productive">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/weather.png" alt="Smart Weather Advisor" loading="lazy">
+            </figure>
+            <h3 class="project-title">Smart Weather Advisor</h3>
+            <p class="project-category">Productive</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              A weather app that not only shows the forecast but also uses AI to provide personalized advice—like suggesting a sweater on a chilly day.
+            </p>
+            <a href="https://github.com/yourrepo/smart-weather-advisor" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- Recipe Recommender -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="productive">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/rec.png" alt="Recipe Recommender" loading="lazy">
+            </figure>
+            <h3 class="project-title">Recipe Recommender</h3>
+            <p class="project-category">Productive</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              An app where users input ingredients and the AI suggests creative recipes using a combination of AI and a curated recipe dataset.
+            </p>
+            <a href="https://github.com/yourrepo/recipe-recommender" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        <!-- AI-Enhanced Memory Game -->
+        <li class="project-item active" data-filter-item data-model="chatgpt" data-category="gaming">
+          <a href="#" class="project-link">
+            <figure class="project-img">
+              <div class="project-item-icon-box" data-project-toggle>
+                <ion-icon name="eye-outline"></ion-icon>
+              </div>
+              <img src="./assets/images/mem.png" alt="AI-Enhanced Memory Game" loading="lazy">
+            </figure>
+            <h3 class="project-title">AI-Enhanced Memory Game</h3>
+            <p class="project-category">Gaming</p>
+          </a>
+          <div class="project-details" style="display: none;">
+            <p class="project-description">
+              A classic memory matching game where AI-generated hints adjust the difficulty based on the player's performance.
+            </p>
+            <a href="https://github.com/yourrepo/ai-memory-game" class="collaborate-btn">Collaborate</a>
+          </div>
+        </li>
+  
+        
+      </ul>
+    </section>
+  </article>
+  
 
 
 
