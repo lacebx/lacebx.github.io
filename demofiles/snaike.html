@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Snake Game</title>
+  <style>
+    body {
+      margin: 0;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    canvas {
+      background: #000;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+  <script>
+    // Canvas setup
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const gridSize = 20;                  // Each grid cell is 20x20 pixels
+    const tileCount = canvas.width / gridSize;
+
+    // Player snake definition
+    const player = {
+      x: Math.floor(tileCount / 2),
+      y: Math.floor(tileCount / 2),
+      dx: 1,
+      dy: 0,
+      tail: [],
+      tailLength: 3
+    };
+
+    // AI adversary snake definition
+    const adversary = {
+      x: Math.floor(tileCount / 4),
+      y: Math.floor(tileCount / 4),
+      dx: 1,
+      dy: 0,
+      tail: [],
+      tailLength: 3,
+      speedFactor: 1  // Can be used to tweak AI speed independently if desired
+    };
+
+    // Food setup
+    const food = { x: 0, y: 0 };
+    function placeFood() {
+      food.x = Math.floor(Math.random() * tileCount);
+      food.y = Math.floor(Math.random() * tileCount);
+    }
+    placeFood();
+
+    // Game state variables
+    let score = 0;
+    let level = 1;
+    const baseSpeed = 150;                // Base interval (in ms) for game updates
+    let gameInterval = baseSpeed;
+    let gameTimer;
+
+    // Player control via arrow keys
+    document.addEventListener('keydown', e => {
+      switch(e.key) {
+        case "ArrowUp":
+          if (player.dy === 0) { player.dx = 0; player.dy = -1; }
+          break;
+        case "ArrowDown":
+          if (player.dy === 0) { player.dx = 0; player.dy = 1; }
+          break;
+        case "ArrowLeft":
+          if (player.dx === 0) { player.dx = -1; player.dy = 0; }
+          break;
+        case "ArrowRight":
+          if (player.dx === 0) { player.dx = 1; player.dy = 0; }
+          break;
+      }
+    });
+
+    // Main game loop: update game state and render frame
+    function gameLoop() {
+      update();
+      draw();
+    }
+
+    function update() {
+      // --- Update Player Snake ---
+      player.x += player.dx;
+      player.y += player.dy;
+      // Wrap-around behavior
+      if (player.x < 0) player.x = tileCount - 1;
+      if (player.x >= tileCount) player.x = 0;
+      if (player.y < 0) player.y = tileCount - 1;
+      if (player.y >= tileCount) player.y = 0;
+      player.tail.push({ x: player.x, y: player.y });
+      if (player.tail.length > player.tailLength) player.tail.shift();
+
+      // Self-collision detection for player
+      for (let i = 0; i < player.tail.length - 1; i++) {
+        if (player.x === player.tail[i].x && player.y === player.tail[i].y) {
+          resetGame();
+          return;
+        }
+      }
+
+      // Player eats food: grow and adjust difficulty
+      if (player.x === food.x && player.y === food.y) {
+        player.tailLength++;
+        score++;
+        placeFood();
+        adjustDifficulty();
+      }
+
+      // --- Update AI Adversary ---
+      // Simple AI: move toward the food using a greedy approach
+      if (adversary.x < food.x) {
+        adversary.dx = 1; adversary.dy = 0;
+      } else if (adversary.x > food.x) {
+        adversary.dx = -1; adversary.dy = 0;
+      } else if (adversary.y < food.y) {
+        adversary.dx = 0; adversary.dy = 1;
+      } else if (adversary.y > food.y) {
+        adversary.dx = 0; adversary.dy = -1;
+      }
+      adversary.x += adversary.dx;
+      adversary.y += adversary.dy;
+      // Wrap-around for adversary
+      if (adversary.x < 0) adversary.x = tileCount - 1;
+      if (adversary.x >= tileCount) adversary.x = 0;
+      if (adversary.y < 0) adversary.y = tileCount - 1;
+      if (adversary.y >= tileCount) adversary.y = 0;
+      adversary.tail.push({ x: adversary.x, y: adversary.y });
+      if (adversary.tail.length > adversary.tailLength) adversary.tail.shift();
+
+      // Self-collision for adversary: reset its tail if needed
+      for (let i = 0; i < adversary.tail.length - 1; i++) {
+        if (adversary.x === adversary.tail[i].x && adversary.y === adversary.tail[i].y) {
+          adversary.tail = [];
+          adversary.tailLength = 3;
+          break;
+        }
+      }
+
+      // If adversary eats the food, it grows too (and food is re-spawned)
+      if (adversary.x === food.x && adversary.y === food.y) {
+        adversary.tailLength++;
+        placeFood();
+      }
+
+      // Collision between player and adversary: reset game
+      if (player.x === adversary.x && player.y === adversary.y) {
+        resetGame();
+        return;
+      }
+    }
+
+    // Dynamically adjust game difficulty based on the score
+    function adjustDifficulty() {
+      // Increase level every 5 points
+      level = Math.floor(score / 5) + 1;
+      // Speed up the game; lower interval means faster updates
+      gameInterval = Math.max(50, baseSpeed - (level - 1) * 10);
+      adversary.speedFactor = 1 + (level - 1) * 0.1;  // This can be used to tweak AI behavior further
+
+      // Restart the game loop with the new interval
+      clearInterval(gameTimer);
+      gameTimer = setInterval(gameLoop, gameInterval);
+    }
+
+    // Draw all game elements
+    function draw() {
+      // Clear the canvas
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Draw food
+      ctx.fillStyle = "red";
+      ctx.fillRect(food.x * gridSize, food.y * gridSize, gridSize, gridSize);
+
+      // Draw player snake
+      ctx.fillStyle = "lime";
+      for (const segment of player.tail) {
+        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 1, gridSize - 1);
+      }
+
+      // Draw AI adversary snake
+      ctx.fillStyle = "orange";
+      for (const segment of adversary.tail) {
+        ctx.fillRect(segment.x * gridSize, segment.y * gridSize, gridSize - 1, gridSize - 1);
+      }
+
+      // Display score and level
+      ctx.fillStyle = "white";
+      ctx.font = "16px Arial";
+      ctx.fillText("Score: " + score, 10, canvas.height - 10);
+      ctx.fillText("Level: " + level, canvas.width - 80, canvas.height - 10);
+    }
+
+    // Reset the game state if a collision occurs
+    function resetGame() {
+      // Reset player properties
+      player.x = Math.floor(tileCount / 2);
+      player.y = Math.floor(tileCount / 2);
+      player.dx = 1;
+      player.dy = 0;
+      player.tail = [];
+      player.tailLength = 3;
+
+      // Reset adversary properties
+      adversary.x = Math.floor(tileCount / 4);
+      adversary.y = Math.floor(tileCount / 4);
+      adversary.dx = 1;
+      adversary.dy = 0;
+      adversary.tail = [];
+      adversary.tailLength = 3;
+
+      // Reset score and level, then restart game loop
+      score = 0;
+      level = 1;
+      gameInterval = baseSpeed;
+      clearInterval(gameTimer);
+      gameTimer = setInterval(gameLoop, gameInterval);
+    }
+
+    // Start the game loop
+    gameTimer = setInterval(gameLoop, gameInterval);
+  </script>
+</body>
+</html>
