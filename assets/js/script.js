@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
  // Replace with your deployed Railway URL
- const CHATBOT_API_URL = "https://me0-minimvp-production.up.railway.app/chat";
+ const CHATBOT_API_URL = "https://me0-mini-mvp-247914167511.us-central1.run.app/chat"; // Updated URL
 
  // Flag to track if the bot is processing a request
  let isProcessing = false;
