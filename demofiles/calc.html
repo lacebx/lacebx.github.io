@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Physical Calculator</title>
+  <style>
+    /* Overall page styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    /* Calculator container */
+    .calculator {
+      background: #444;
+      width: 300px;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Title/Header */
+    .calculator .calc-title {
+      color: #fff;
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    /* Display screen styling */
+    .calc-display {
+      background: #222;
+      color: #0f0;
+      font-size: 1.2rem;
+      text-align: right;
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 100%;
+      border-radius: 5px;
+      box-sizing: border-box;
+      min-height: 40px;
+      overflow-x: auto;
+    }
+
+    /* Keypad area styling */
+    .calc-keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+    }
+
+    /* Individual keys */
+    .calc-key {
+      background: #eee;
+      border: none;
+      font-size: 1rem;
+      border-radius: 5px;
+      padding: 15px 0;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s;
+      user-select: none;
+    }
+
+    .calc-key:hover {
+      background: #ddd;
+    }
+
+    /* Pressed key highlight */
+    .calc-key.pressed {
+      background: #bbb !important;
+    }
+
+    /* Explanation area below the calculator */
+    .explanation {
+      margin-top: 20px;
+      max-width: 300px;
+      font-size: 0.9rem;
+      color: #333;
+      background: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <!-- The Calculator Container -->
+    <div class="calculator">
+      <!-- Title -->
+      <div class="calc-title">Calculator</div>
+      <!-- Display Screen -->
+      <div id="calcDisplay" class="calc-display"></div>
+      <!-- Keypad -->
+      <div class="calc-keypad" id="calcKeypad">
+        <!-- Row 1 -->
+        <div class="calc-key" data-value="7">7</div>
+        <div class="calc-key" data-value="8">8</div>
+        <div class="calc-key" data-value="9">9</div>
+        <div class="calc-key" data-value="/">÷</div>
+        <!-- Row 2 -->
+        <div class="calc-key" data-value="4">4</div>
+        <div class="calc-key" data-value="5">5</div>
+        <div class="calc-key" data-value="6">6</div>
+        <div class="calc-key" data-value="*">×</div>
+        <!-- Row 3 -->
+        <div class="calc-key" data-value="1">1</div>
+        <div class="calc-key" data-value="2">2</div>
+        <div class="calc-key" data-value="3">3</div>
+        <div class="calc-key" data-value="-">−</div>
+        <!-- Row 4 -->
+        <div class="calc-key" data-value="0">0</div>
+        <div class="calc-key" data-value=".">.</div>
+        <div class="calc-key" data-value="=">=</div>
+        <div class="calc-key" data-value="+">+</div>
+        <!-- Row 5 (Clear, Backspace, etc.) -->
+        <div class="calc-key" data-value="C" style="grid-column: span 2;">C</div>
+        <div class="calc-key" data-value="Backspace" style="grid-column: span 2;">⌫</div>
+      </div>
+    </div>
+
+    <!-- Explanation area -->
+    <div class="explanation" id="explanation">
+      <strong>Steps:</strong>
+      <div id="explanationText">No calculation performed yet.</div>
+    </div>
+  </div>
+
+  <script>
+    const display = document.getElementById('calcDisplay');
+    const keypad = document.getElementById('calcKeypad');
+    const explanationDiv = document.getElementById('explanationText');
+
+    let expression = "";
+
+    /* 
+     * 1. Handles both on-screen button clicks and keyboard input
+     * 2. For keys that match a calculator button, we highlight the button and process input
+    */
+
+    // Map keyboard keys to calculator values
+    const keyMap = {
+      '0': '0', '1': '1', '2': '2', '3': '3', '4': '4',
+      '5': '5', '6': '6', '7': '7', '8': '8', '9': '9',
+      '.': '.', '+': '+', '-': '-', '*': '*', '/': '/',
+      'Enter': '=', '=': '=', 'Backspace': 'Backspace',
+      'c': 'C', 'C': 'C', 'Delete': 'C'  // let 'Delete' also clear
+    };
+
+    // Listen for keyboard input
+    document.addEventListener('keydown', (e) => {
+      const calcValue = keyMap[e.key];
+      if (calcValue) {
+        // Highlight the corresponding button
+        highlightButton(calcValue);
+        handleInput(calcValue);
+      }
+    });
+
+    // Listen for on-screen button clicks
+    keypad.addEventListener('click', (e) => {
+      if (e.target.classList.contains('calc-key')) {
+        const val = e.target.getAttribute('data-value');
+        highlightButton(val);
+        handleInput(val);
+      }
+    });
+
+    // Highlight button briefly
+    function highlightButton(val) {
+      const btn = [...keypad.children].find(
+        (child) => child.getAttribute('data-value') === val
+      );
+      if (btn) {
+        btn.classList.add('pressed');
+        setTimeout(() => btn.classList.remove('pressed'), 150);
+      }
+    }
+
+    // Handle the actual input logic
+    function handleInput(val) {
+      switch (val) {
+        case 'C':
+          // Clear everything
+          expression = "";
+          display.textContent = "";
+          explanationDiv.textContent = "No calculation performed yet.";
+          break;
+
+        case 'Backspace':
+          // Remove last character
+          expression = expression.slice(0, -1);
+          display.textContent = expression;
+          break;
+
+        case '=':
+          // Evaluate the expression
+          if (expression.trim() === "") {
+            explanationDiv.textContent = "Nothing to calculate.";
+            break;
+          }
+          try {
+            const result = eval(expression);
+            // Generate a short explanation
+            const shortExplanation = `I computed your expression: ${expression} = ${result}.`;
+            explanationDiv.textContent = shortExplanation;
+            expression = String(result);
+            display.textContent = expression;
+          } catch (err) {
+            explanationDiv.textContent = "Error in expression.";
+          }
+          break;
+
+        default:
+          // Append the input (number, operator, or decimal)
+          expression += val;
+          display.textContent = expression;
+          break;
+      }
+    }
+  </script>
+</body>
+</html>

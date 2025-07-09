@@ -696,11 +696,11 @@
         <div class="project-details" style="display: none;">
           <p class="project-description">An application that helps universities monitor the career readiness and progress of students. Students can log in and earn points by completing tasks assigned by the university, preparing them for employment in their field of study. The app also shares this data with potential employers to help them find suitable candidates.</p>
           <a href="https://github.com/yourrepo/eagle-flightplan" class="collaborate-btn">Collaborate</a>
-          <button class="try-demo-btn" data-demo="eagle-flightplan.html">Try Demo</button>
+          <button class="try-demo-btn" data-demo="https://project3.eaglesoftwareteam.com/2025/flight-plan/t8/">Try Demo</button>
         </div>
       </li>
 
-      <li class="project-item active" data-filter-item data-category="Education" data-demo="course-hub.html">
+      <li class="project-item active" data-filter-item data-category="Education" data-demo="https://project3.eaglesoftwareteam.com/2024/project2/t8/home">
         <a href="#" class="project-link">
           <figure class="project-img">
             <div class="project-item-icon-box" data-project-toggle>
@@ -714,7 +714,7 @@
         <div class="project-details" style="display: none;">
           <p class="project-description">An application designed for school administrators to search for courses offered by the university. The app allows users to perform CRUD operations on these courses, facilitating efficient management of course offerings.</p>
           <a href="https://github.com/yourrepo/course-hub" class="collaborate-btn">Collaborate</a>
-          <button class="try-demo-btn" data-demo="course-hub.html">Try Demo</button>
+          <button class="try-demo-btn" data-demo="https://project3.eaglesoftwareteam.com/2024/project2/t8/">Try Demo</button>
         </div>
       </li>
 
@@ -837,7 +837,7 @@
               A smart calculator that not only performs basic arithmetic but also explains its steps using natural language.
             </p>
             <a href="https://github.com/yourrepo/ai-calculator" class="collaborate-btn">Collaborate</a>
-            <button class="try-demo-btn" data-demo="ai-calculator.html">Try Demo</button>
+            <button class="try-demo-btn" data-demo="calc.html">Try Demo</button>
           </div>
         </li>
   
@@ -1116,8 +1116,12 @@
       e.preventDefault();
       const demoFile = this.getAttribute('data-demo');
       if (demoFile) {
-        demoIframe.src = `/demofiles/${demoFile}`;
-        demoModal.style.display = 'flex';
+        if (demoFile.startsWith('http://') || demoFile.startsWith('https://')) {
+          window.open(demoFile, '_blank');
+        } else {
+          demoIframe.src = `/demofiles/${demoFile}`;
+          demoModal.style.display = 'flex';
+        }
       }
     });
   });
