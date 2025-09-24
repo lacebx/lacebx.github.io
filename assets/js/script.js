@@ -290,8 +290,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
- // Replace with your deployed Railway URL
- const CHATBOT_API_URL = "https://me0-mini-mvp-247914167511.us-central1.run.app/chat"; // Updated URL
+ // Railway URL to deploy the chatbot
+ const CHATBOT_API_URL = "http://127.0.0.1:8080/chat"; // Local Flask server
 
  // Flag to track if the bot is processing a request
  let isProcessing = false;
